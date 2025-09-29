@@ -1,10 +1,10 @@
 The ``0-add_integer`` module
-======================
+===========================
 
-Using ``add_integer.``
--------------------
+Using ``add_integer``
+--------------------
 
-This is an 0-add_integer text file in reStructuredText format.  First import
+This is an example text file in reStructuredText format. First import
 ``add_integer`` from the ``0-add_integer`` module:
 
     >>> add_integer = __import__('0-add_integer').add_integer
@@ -19,14 +19,18 @@ Now use it:
     100
     >>> add_integer(100.3, -2)
     98
-    >>> add_integer(4, 5.7)
-    9
-    >>> add_integer(4, "School")
+    >>> add_integer(-5.9, 5.9)
+    0
+    >>> add_integer(0, 0)
+    0
+
+Handling errors:
+
+    >>> add_integer(4, "School")  # doctest: +IGNORE_EXCEPTION_DETAIL
     Traceback (most recent call last):
         ...
     TypeError: b must be an integer
-
-    >>> add_integer(None)
+    >>> add_integer(None)  # doctest: +IGNORE_EXCEPTION_DETAIL
     Traceback (most recent call last):
         ...
     TypeError: a must be an integer
