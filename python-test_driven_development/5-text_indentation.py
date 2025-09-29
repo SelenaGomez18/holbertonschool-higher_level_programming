@@ -28,4 +28,4 @@ def text_indentation(text):
             buffer = ""
 
     if buffer.strip():
-        print(buffer.strip(), end="")
+        print(buffer.strip(), end="")  # 🔥 evita salto extra final
