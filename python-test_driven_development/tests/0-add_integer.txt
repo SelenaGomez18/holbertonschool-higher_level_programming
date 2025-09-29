@@ -7,9 +7,14 @@ Using ``add_integer.``
 This is an 0-add_integer text file in reStructuredText format.  First import
 ``add_integer`` from the ``0-add_integer`` module:
 
-    >>> from 0-add_integer import add_integer
+    >>> add_integer = __import__('0-add_integer').add_integer
 
 Now use it:
 
     >>> add_integer(1, 2)
     3
+    >>> add_integer(100, -2)
+    98
+    >>> add_integer(2)
+    100
+    
