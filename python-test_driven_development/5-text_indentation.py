@@ -17,15 +17,16 @@ def text_indentation(text):
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    i = 0
-    while i < len(text):
-        if text[i] in ".:?":
-            print(text[:i + 1].strip())
-            print()
-            text = text[i + 1:]
-            i = 0
-        else:
-            i += 1
+    text = text.strip()
+    start = 0
 
-    if text.strip():
-        print(text.strip())
+    for i, char in enumerate(text):
+        if char in ".:?":
+            print(text[start:i+1].strip())
+            print()  # salto extra para dos líneas en total
+            start = i + 1
+
+    # Imprime el resto, sin línea vacía extra al final
+    rest = text[start:].strip()
+    if rest:
+        print(rest, end='')
