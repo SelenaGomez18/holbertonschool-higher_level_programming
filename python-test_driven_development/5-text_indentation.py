@@ -1,53 +1,32 @@
 #!/usr/bin/python3
 """
-This module defines a function that prints a text
-with a new line after each '.', '?' or ':' character,
-followed by one empty line (i.e., two line breaks).
+This module contains the function text_indentation
+that prints a text with 2 new lines after '.', '?', and ':'.
 """
 
 
 def text_indentation(text):
     """
-    Prints a text with a new line and a blank line
-    after each '.', '?' or ':' character.
+    Prints a text with 2 new lines after '.', '?', and ':'.
 
     Args:
-        text (str): The input text to format and print.
+        text (str): The text to process.
 
     Raises:
-        TypeError: If the input text is not a string.
+        TypeError: If text is not a string.
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    text = text.strip()
     i = 0
-    n = len(text)
-    buffer = ""
-    delimiters = {'.', '?', ':'}
-
-    while i < n:
-        char = text[i]
-        buffer += char
-
-        if char in delimiters:
-            j = i + 1
-            while j < n and text[j] in delimiters:
-                buffer += text[j]
-                j += 1
-            i = j - 1  # update i to last delimiter in group
-
-            print(buffer.strip() + "\n")
-            buffer = ""
-
-            # skip all spaces after delimiter group
+    while i < len(text):
+        ch = text[i]
+        print(ch, end="")
+        if ch in ".?:":
+            print("\n")
+            # saltar espacios después del símbolo
             i += 1
-            while i < n and text[i] == ' ':
+            while i < len(text) and text[i] == " ":
                 i += 1
             continue
-
         i += 1
-
-    # Print remaining text without extra newline at end
-    if buffer.strip():
-        print(buffer.strip(), end='')
