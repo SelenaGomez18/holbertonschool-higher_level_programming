@@ -29,7 +29,6 @@ def text_indentation(text):
         buffer += char
 
         if char in delimiters:
-            # Look ahead to group trailing delimiters (like '?!:' or '...') with current
             j = i + 1
             while j < n and text[j] in delimiters:
                 buffer += text[j]
