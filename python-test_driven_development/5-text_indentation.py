@@ -4,6 +4,7 @@ This module defines a function that prints a text
 with two new lines after each '.', '?' or ':' character.
 """
 
+
 def text_indentation(text):
     """
     Prints a text with two new lines after each '.', '?' or ':' character.
@@ -23,10 +24,9 @@ def text_indentation(text):
     for i, char in enumerate(text):
         if char in ".:?":
             print(text[start:i+1].strip())
-            print()  # salto extra para dos líneas en total
+            print()
             start = i + 1
 
-    # Imprime el resto, sin línea vacía extra al final
     rest = text[start:].strip()
     if rest:
         print(rest, end='')
