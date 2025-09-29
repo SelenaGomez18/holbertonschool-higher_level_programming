@@ -22,7 +22,7 @@ Now use it:
     >>> add_integer(4, 5.7)
     9
 
-    Now we test exceptions:
+    # Now we test exceptions:
 
     >>> add_integer(4, "School")
     Traceback (most recent call last):
