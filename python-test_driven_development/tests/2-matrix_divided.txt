@@ -60,7 +60,7 @@ Now we test exceptions:
     >>> matrix_divided([[1, 2], [3, 4]], float('nan'))
     [[nan, nan], [nan, nan]]
 
-        >>> matrix_divided()
+    >>> matrix_divided()
     Traceback (most recent call last):
         ...
     TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
