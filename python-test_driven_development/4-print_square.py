@@ -1,13 +1,22 @@
+#!/usr/bin/python3
+"""
+4-print_square module
+
+This module provides a function that prints a square
+with the character '#', based on the given size.
+"""
+
+
 def print_square(size):
     """
-    Imprime un cuadrado hecho con el caracter '#'.
+    Print a square with the character '#'.
 
     Args:
-        size (int): tamaño del lado del cuadrado.
+        size (int): The size length of the square.
 
     Raises:
-        TypeError: si size no es un entero.
-        ValueError: si size es menor que 0.
+        TypeError: If size is not an integer.
+        ValueError: If size is less than 0.
     """
     if not isinstance(size, int):
         raise TypeError("size must be an integer")
