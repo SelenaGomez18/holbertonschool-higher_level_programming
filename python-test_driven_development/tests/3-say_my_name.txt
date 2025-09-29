@@ -1,5 +1,5 @@
-The ``say_my_name`` module
-==========================
+The ``3-say_my_name`` module
+============================
 
 Using ``say_my_name``
 ---------------------
@@ -10,26 +10,21 @@ First import ``say_my_name`` from the ``3-say_my_name`` module:
 
 Now use it:
 
-    >>> say_my_name("Juan", "Pérez")
-    My name is Juan Pérez
+    >>> say_my_name("John", "Smith")
+    My name is John Smith
+    >>> say_my_name("Walter", "White")
+    My name is Walter White
+    >>> say_my_name("Bob")
+    My name is Bob
 
-    >>> say_my_name("María")
-    My name is María
+Now test exceptions:
 
-    >>> say_my_name("", "López")
-    My name is  López
-
-    >>> say_my_name("", "")
-    My name is
-
-Now we test exceptions:
-
-    >>> say_my_name(5, "López")
+    >>> say_my_name(12, "White")
     Traceback (most recent call last):
         ...
     TypeError: first_name must be a string
 
-    >>> say_my_name("Ana", 7)
+    >>> say_my_name("John", 34)
     Traceback (most recent call last):
         ...
     TypeError: last_name must be a string

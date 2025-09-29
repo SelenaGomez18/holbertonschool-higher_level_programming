@@ -1,25 +1,24 @@
 #!/usr/bin/python3
 """
-Módulo 3-say_my_name
-
-Contiene la función say_my_name que imprime el nombre completo dado.
+3-say_my_name module
+This module contains a function that prints the full name.
 """
 
 
 def say_my_name(first_name, last_name=""):
     """
-    Imprime My name is <first_name> <last_name>.
+    Prints My name is <first_name> <last_name>.
 
     Args:
-        first_name (str): Primer nombre.
-        last_name (str): Apellido (opcional).
+        first_name (str): first name
+        last_name (str): last name (optional)
 
     Raises:
-        TypeError: Si first_name o last_name no son cadenas de texto.
+        TypeError: if first_name or last_name is not a string
     """
     if not isinstance(first_name, str):
         raise TypeError("first_name must be a string")
     if not isinstance(last_name, str):
         raise TypeError("last_name must be a string")
 
-    print(f"My name is {first_name} {last_name}".strip())
+    print(f"My name is {first_name} {last_name}".rstrip())
