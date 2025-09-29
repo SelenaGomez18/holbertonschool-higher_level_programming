@@ -4,7 +4,6 @@ This module defines a function that prints a text
 with two new lines after each '.', '?' or ':' character.
 """
 
-
 def text_indentation(text):
     """
     Prints a text with two new lines after each '.', '?' or ':' character.
@@ -20,33 +19,26 @@ def text_indentation(text):
 
     text = text.strip()
     i = 0
-    n = len(text)
-    buffer = ""
-    delimiters = {'.', '?', ':'}
-
-    while i < n:
-        char = text[i]
-        buffer += char
-
-        if char in delimiters:
-            j = i + 1
-            while j < n and text[j] in delimiters:
-                buffer += text[j]
-                j += 1
-            i = j - 1  # update i to last delimiter in group
-
-            print(buffer.strip())
-            print()  # two new lines (one from print, one extra)
-            buffer = ""
-
-            # skip all spaces after delimiter group
+    length = len(text)
+    while i < length:
+        start = i
+        # Move forward until we find a punctuation
+        while i < length and text[i] not in ".?:":
             i += 1
-            while i < n and text[i] == ' ':
+        # If we found a punctuation, include all consecutive punctuations
+        if i < length and text[i] in ".?:":
+            # include this punctuation
+            i += 1
+            # Include consecutive punctuation marks as well
+            while i < length and text[i] in ".?:":
                 i += 1
-            continue
-
-        i += 1
-
-    # Print remaining text without extra newline at end
-    if buffer.strip():
-        print(buffer.strip(), end='')
+            # print the slice from start to i, stripped
+            print(text[start:i].strip())
+            print()
+        else:
+            # No punctuation found until end, print rest
+            print(text[start:].strip())
+            break
+        # Skip any spaces after punctuation
+        while i < length and text[i] == ' ':
+            i += 1
