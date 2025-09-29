@@ -15,31 +15,32 @@ def text_indentation(text):
 
     i = 0
     n = len(text)
-    buf = ''
+    buf = []
 
     while i < n:
         ch = text[i]
-        # If we hit a delimiting character, append it, print buffer trimmed,
-        # print an extra blank line, reset buffer and skip following spaces.
-        if ch in '.?:':
-            buf += ch
-            print(buf.strip())
-            print()
-            buf = ''
+
+        # if delimiter found, flush buffer + print blank line then skip spaces
+        if ch in ".?:":
+            buf.append(ch)
+            line = ''.join(buf).strip()
+            print(line)   # print sentence (adds newline)
+            print()       # extra blank line
+            buf = []
             i += 1
-            # skip all spaces after the punctuation to avoid leading spaces
+            # skip all spaces after punctuation to avoid leading spaces on next line
             while i < n and text[i] == ' ':
                 i += 1
             continue
 
-        # Skip leading spaces for a new line (avoid spaces at start)
-        if ch == ' ' and buf == '':
+        # avoid leading spaces in a new buffer
+        if ch == ' ' and not buf:
             i += 1
             continue
 
-        buf += ch
+        buf.append(ch)
         i += 1
 
-    # Print any remaining text (no extra blank line afterwards)
+    # print any remaining text (no extra blank line after last fragment)
     if buf:
-        print(buf.strip(), end='')
+        print(''.join(buf).strip())
