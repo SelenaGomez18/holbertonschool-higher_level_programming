@@ -14,7 +14,8 @@ def matrix_divided(matrix, div):
         div: number (integer or float)
 
     Returns:
-        New matrix with all elements divided by div, rounded to 2 decimal places
+        New matrix with all elements divided by div,
+        rounded to 2 decimal places
 
     Raises:
         TypeError: if matrix is not a list of lists of ints/floats,
