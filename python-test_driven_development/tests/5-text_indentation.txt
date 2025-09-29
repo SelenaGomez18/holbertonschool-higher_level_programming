@@ -1,52 +1,37 @@
-The ``5-text_indentation`` module
-=================================
+This is the doctest file for text_indentation function.
 
-Using ``text_indentation``
----------------------------
+>>> text_indentation = __import__('5-text_indentation').text_indentation
 
-First import ``text_indentation`` from the ``5-text_indentation`` module:
+# Basic usage with punctuation.
+>>> text_indentation("Hello. How are you? I'm fine: thanks.")
+Hello.
 
-    >>> text_indentation = __import__('5-text_indentation').text_indentation
+How are you?
 
-Now use it with a sample text:
+I'm fine:
 
-    >>> text_indentation("Hello. How are you? I'm fine: thanks.")
-    Hello.
-    <BLANKLINE>
-    How are you?
-    <BLANKLINE>
-    I'm fine:
-    <BLANKLINE>
-    thanks.
+thanks.
 
-Now use it with extra spaces around punctuation:
+# Leading and trailing spaces should be trimmed.
+>>> text_indentation("  This is a test.   Another one?   Yes: sure.  ")
+This is a test.
 
-    >>> text_indentation("  This is a test.   Another one?   Yes: sure.  ")
-    This is a test.
-    <BLANKLINE>
-    Another one?
-    <BLANKLINE>
-    Yes:
-    <BLANKLINE>
-    sure.
+Another one?
 
-Now test edge case: multiple punctuation marks together
+Yes:
 
-    >>> text_indentation("Wait... What?!:Really?")
-    Wait.
-    <BLANKLINE>
-    .
-    <BLANKLINE>
-    .
-    <BLANKLINE>
-    What?!
-    <BLANKLINE>
-    Really?
-    <BLANKLINE>
+sure.
 
-Now test invalid input (not a string):
+# Multiple punctuation marks should be handled properly.
+>>> text_indentation("Wait... What?!:Really?")
+Wait...
 
-    >>> text_indentation(123)
-    Traceback (most recent call last):
-        ...
-    TypeError: text must be a string
+What?!:
+
+Really?
+
+# Input must be a string, else raise TypeError.
+>>> text_indentation(123)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string

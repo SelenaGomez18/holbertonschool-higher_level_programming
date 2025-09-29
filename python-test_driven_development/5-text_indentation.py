@@ -19,14 +19,35 @@ def text_indentation(text):
         raise TypeError("text must be a string")
 
     text = text.strip()
-    start = 0
+    i = 0
+    n = len(text)
+    buffer = ""
+    delimiters = {'.', '?', ':'}
 
-    for i, char in enumerate(text):
-        if char in ".:?":
-            print(text[start:i+1].strip())
-            print()
-            start = i + 1
+    while i < n:
+        char = text[i]
+        buffer += char
 
-    rest = text[start:].strip()
-    if rest:
-        print(rest, end='')
+        if char in delimiters:
+            # Look ahead to group trailing delimiters (like '?!:' or '...') with current
+            j = i + 1
+            while j < n and text[j] in delimiters:
+                buffer += text[j]
+                j += 1
+            i = j - 1  # update i to last delimiter in group
+
+            print(buffer.strip())
+            print()  # two new lines (one from print, one extra)
+            buffer = ""
+
+            # skip all spaces after delimiter group
+            i += 1
+            while i < n and text[i] == ' ':
+                i += 1
+            continue
+
+        i += 1
+
+    # Print remaining text without extra newline at end
+    if buffer.strip():
+        print(buffer.strip(), end='')
