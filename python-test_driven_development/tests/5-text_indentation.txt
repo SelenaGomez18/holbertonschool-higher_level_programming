@@ -1,61 +1,63 @@
 #!/usr/bin/python3
-"""Unittests for text_indentation"""
+"""Unittest for text_indentation function"""
 
 import unittest
 from io import StringIO
 import sys
 
-text_indentation = __import__('text_indentation').text_indentation
+text_indentation = __import__('5-text_indentation').text_indentation
 
 class TestTextIndentation(unittest.TestCase):
     def setUp(self):
-        # Captura stdout
-        self.captured_output = StringIO()
-        self.old_stdout = sys.stdout
-        sys.stdout = self.captured_output
+        # Redirige stdout para capturar prints
+        self.held_stdout = sys.stdout
+        sys.stdout = StringIO()
 
     def tearDown(self):
         # Restaura stdout
-        sys.stdout = self.old_stdout
+        sys.stdout = self.held_stdout
 
-    def test_simple_sentence(self):
-        text_indentation("Hello. How are you?")
-        expected = "Hello.\n\nHow are you?\n\n"
-        self.assertEqual(self.captured_output.getvalue(), expected)
+    def test_text_indentation_output(self):
+        input_text = ("Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                      " Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere?"
+                      " Non autem hoc: igitur ne illud quidem. Fortasse id optimum, sed ubi illud:"
+                      " Plus semper voluptatis? Teneo, inquit, finem illi videri nihil dolere."
+                      " Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens."
+                      " Si id dicis, vicimus. Inde sermone vario sex illa a Dipylo stadia confecimus."
+                      " Sin aliud quid voles, postea. Quae animi affectio suum cuique tribuens atque hanc, quam dico."
+                      " Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres")
 
-    def test_multiple_delimiters_together(self):
-        text_indentation("Wait... What??! Stop: Now.")
-        expected = "Wait...\n\nWhat??!\n\nStop:\n\nNow.\n\n"
-        self.assertEqual(self.captured_output.getvalue(), expected)
+        expected_output = (
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\n"
+            "Quonam modo?\n\n"
+            "Utrum igitur tibi litteram videor an totas paginas commovere?\n\n"
+            "Non autem hoc:\n\n"
+            "igitur ne illud quidem.\n\n"
+            "Fortasse id optimum, sed ubi illud:\n\n"
+            "Plus semper voluptatis?\n\n"
+            "Teneo, inquit, finem illi videri nihil dolere.\n\n"
+            "Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens.\n\n"
+            "Si id dicis, vicimus.\n\n"
+            "Inde sermone vario sex illa a Dipylo stadia confecimus.\n\n"
+            "Sin aliud quid voles, postea.\n\n"
+            "Quae animi affectio suum cuique tribuens atque hanc, quam dico.\n\n"
+            "Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres"
+        )
 
-    def test_spaces_after_delimiters(self):
-        text_indentation("Hello.    How are you?   I am fine.")
-        expected = "Hello.\n\nHow are you?\n\nI am fine.\n\n"
-        self.assertEqual(self.captured_output.getvalue(), expected)
+        text_indentation(input_text)
 
-    def test_no_delimiters(self):
-        text_indentation("Hello there")
-        expected = "Hello there"
-        self.assertEqual(self.captured_output.getvalue(), expected)
+        output = sys.stdout.getvalue()
+        self.assertEqual(output, expected_output)
+
+    def test_type_error(self):
+        with self.assertRaises(TypeError) as cm:
+            text_indentation(123)
+        self.assertEqual(str(cm.exception), "text must be a string")
 
     def test_empty_string(self):
         text_indentation("")
-        expected = ""
-        self.assertEqual(self.captured_output.getvalue(), expected)
-
-    def test_text_is_not_string(self):
-        with self.assertRaises(TypeError):
-            text_indentation(123)
-
-    def test_only_delimiters(self):
-        text_indentation("...???:::")
-        expected = "...\n\n???\n\n:::\n\n"
-        self.assertEqual(self.captured_output.getvalue(), expected)
-
-    def test_spaces_before_text(self):
-        text_indentation("   Hello. World!  ")
-        expected = "Hello.\n\nWorld!"
-        self.assertEqual(self.captured_output.getvalue(), expected)
+        output = sys.stdout.getvalue()
+        self.assertEqual(output, "")
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,13 +1,15 @@
 #!/usr/bin/python3
 """
 This module defines a function that prints a text
-with two new lines after each '.', '?' or ':' character.
+with a new line after each '.', '?' or ':' character,
+followed by one empty line (i.e., two line breaks).
 """
 
 
 def text_indentation(text):
     """
-    Prints a text with two new lines after each '.', '?' or ':' character.
+    Prints a text with a new line and a blank line
+    after each '.', '?' or ':' character.
 
     Args:
         text (str): The input text to format and print.
@@ -35,8 +37,7 @@ def text_indentation(text):
                 j += 1
             i = j - 1  # update i to last delimiter in group
 
-            print(buffer.strip())
-            print()  # two new lines (one from print, one extra)
+            print(buffer.strip() + "\n")
             buffer = ""
 
             # skip all spaces after delimiter group
