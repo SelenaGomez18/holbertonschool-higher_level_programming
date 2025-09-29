@@ -23,10 +23,9 @@ def text_indentation(text):
     for ch in text:
         buffer += ch
         if ch in delimiters:
-            print(buffer.strip())  # imprimimos la parte
-            print()                # salto doble
+            print(buffer.strip())
+            print()
             buffer = ""
 
-    # Si quedó algo pendiente, lo imprimimos SIN salto final
     if buffer.strip():
         print(buffer.strip(), end="")
