@@ -1,39 +1,61 @@
-"""
-This is the doctest file for text_indentation function.
+#!/usr/bin/python3
+"""Unittests for text_indentation"""
 
->>> text_indentation = __import__('5-text_indentation').text_indentation
+import unittest
+from io import StringIO
+import sys
 
-# Basic usage with punctuation.
->>> text_indentation("Hello. How are you? I'm fine: thanks.")
-Hello.
+text_indentation = __import__('text_indentation').text_indentation
 
-How are you?
+class TestTextIndentation(unittest.TestCase):
+    def setUp(self):
+        # Captura stdout
+        self.captured_output = StringIO()
+        self.old_stdout = sys.stdout
+        sys.stdout = self.captured_output
 
-I'm fine:
+    def tearDown(self):
+        # Restaura stdout
+        sys.stdout = self.old_stdout
 
-thanks.
+    def test_simple_sentence(self):
+        text_indentation("Hello. How are you?")
+        expected = "Hello.\n\nHow are you?\n\n"
+        self.assertEqual(self.captured_output.getvalue(), expected)
 
-# Leading and trailing spaces should be trimmed.
->>> text_indentation("  This is a test.   Another one?   Yes: sure.  ")
-This is a test.
+    def test_multiple_delimiters_together(self):
+        text_indentation("Wait... What??! Stop: Now.")
+        expected = "Wait...\n\nWhat??!\n\nStop:\n\nNow.\n\n"
+        self.assertEqual(self.captured_output.getvalue(), expected)
 
-Another one?
+    def test_spaces_after_delimiters(self):
+        text_indentation("Hello.    How are you?   I am fine.")
+        expected = "Hello.\n\nHow are you?\n\nI am fine.\n\n"
+        self.assertEqual(self.captured_output.getvalue(), expected)
 
-Yes:
+    def test_no_delimiters(self):
+        text_indentation("Hello there")
+        expected = "Hello there"
+        self.assertEqual(self.captured_output.getvalue(), expected)
 
-sure.
+    def test_empty_string(self):
+        text_indentation("")
+        expected = ""
+        self.assertEqual(self.captured_output.getvalue(), expected)
 
-# Multiple punctuation marks should be handled properly.
->>> text_indentation("Wait... What?!:Really?")
-Wait...
+    def test_text_is_not_string(self):
+        with self.assertRaises(TypeError):
+            text_indentation(123)
 
-What?!:
+    def test_only_delimiters(self):
+        text_indentation("...???:::")
+        expected = "...\n\n???\n\n:::\n\n"
+        self.assertEqual(self.captured_output.getvalue(), expected)
 
-Really?
+    def test_spaces_before_text(self):
+        text_indentation("   Hello. World!  ")
+        expected = "Hello.\n\nWorld!"
+        self.assertEqual(self.captured_output.getvalue(), expected)
 
-# Input must be a string, else raise TypeError.
->>> text_indentation(123)
-Traceback (most recent call last):
-    ...
-TypeError: text must be a string
-"""
+if __name__ == '__main__':
+    unittest.main()
