@@ -1,46 +1,32 @@
 #!/usr/bin/python3
 """
-5-text_indentation module
-Print text with 2 new lines after ., ? and : characters.
-This module provides the text_indentation function.
+Print text with 2 new lines after '.', '?' and ':'.
 """
 
 
 def text_indentation(text):
     """
-    Print a text with 2 new lines after each of these characters: ., ? and :
+    Print a text with 2 new lines after '.', '?' and ':'.
+
+    Args:
+        text (str): The text to process.
+
+    Raises:
+        TypeError: If text is not a string.
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
 
-    i = 0
-    n = len(text)
-    buf = []
+    delimiters = ".?:"
+    buffer = ""
 
-    while i < n:
-        ch = text[i]
+    for ch in text:
+        buffer += ch
+        if ch in delimiters:
+            print(buffer.strip())  # imprimimos la parte
+            print()                # salto doble
+            buffer = ""
 
-        # if delimiter found, flush buffer + print blank line then skip spaces
-        if ch in ".?:":
-            buf.append(ch)
-            line = ''.join(buf).strip()
-            print(line)   # print sentence (adds newline)
-            print()       # extra blank line
-            buf = []
-            i += 1
-            # skip all spaces after punctuation to avoid leading spaces on next line
-            while i < n and text[i] == ' ':
-                i += 1
-            continue
-
-        # avoid leading spaces in a new buffer
-        if ch == ' ' and not buf:
-            i += 1
-            continue
-
-        buf.append(ch)
-        i += 1
-
-    # print any remaining text (no extra blank line after last fragment)
-    if buf:
-        print(''.join(buf).strip())
+    # Si quedó algo pendiente, lo imprimimos SIN salto final
+    if buffer.strip():
+        print(buffer.strip(), end="")
