@@ -3,13 +3,7 @@ The ``0-add_integer`` module
 
 Using ``add_integer``
 --------------------
-
-This is an example text file in reStructuredText format. First import
-``add_integer`` from the ``0-add_integer`` module:
-
     >>> add_integer = __import__('0-add_integer').add_integer
-
-Now use it:
 
     >>> add_integer(1, 2)
     3
@@ -23,9 +17,6 @@ Now use it:
     0
     >>> add_integer(0, 0)
     0
-
-Handling errors:
-
     >>> add_integer(4, "School")  # doctest: +IGNORE_EXCEPTION_DETAIL
     Traceback (most recent call last):
         ...
