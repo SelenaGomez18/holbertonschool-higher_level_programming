@@ -6,6 +6,7 @@ class Rectangle:
     """Represents a rectangle with width and height."""
 
     number_of_instances = 0
+    print_symbol = "#"
 
     def __init__(self, width=0, height=0):
         """Initialize a new Rectangle with optional width and height."""
@@ -48,12 +49,14 @@ class Rectangle:
     def __str__(self):
         if self.__width == 0 or self.__height == 0:
             return ""
-        return "\n".join(["#" * self.__width for _ in range(self.__height)])
+        symbol = str(self.print_symbol)
+        return "\n".join([symbol * self.__width for _ in range(self.__height)])
 
     def __repr__(self):
         return f"Rectangle({self.width}, {self.height})"
 
     def __del__(self):
         print("Bye rectangle...")
-        Rectangle.number_of_instances -= 1 #attribute of class
+        if Rectangle.number_of_instances > 0:
+            Rectangle.number_of_instances -= 1 #attribute of class
 
