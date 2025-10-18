@@ -1,93 +1,60 @@
-Pruebas para 7-base_geometry.py
-
-# -----------------------------------------------------------------
-# Setup de la clase
-# -----------------------------------------------------------------
 >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
 >>> bg = BaseGeometry()
 
-# -----------------------------------------------------------------
-# 1. Prueba de area()
-# -----------------------------------------------------------------
-# Debe lanzar una excepción si no está implementada
 >>> bg.area()
 Traceback (most recent call last):
 ...
 Exception: area() is not implemented
 
-# -----------------------------------------------------------------
-# 2. Pruebas de integer_validator() - Casos Válidos
-# -----------------------------------------------------------------
-# Debe pasar sin errores (valor > 0)
 >>> bg.integer_validator("my_int", 12)
 >>> bg.integer_validator("width", 89)
 >>> bg.integer_validator("distance", 1)
 
-# -----------------------------------------------------------------
-# 3. Pruebas de integer_validator() - ValueError (Valor no > 0)
-# -----------------------------------------------------------------
-# Caso 1: Valor igual a 0
 >>> bg.integer_validator("age", 0)
 Traceback (most recent call last):
 ...
 ValueError: age must be greater than 0
 
-# Caso 2: Valor negativo
 >>> bg.integer_validator("distance", -4)
 Traceback (most recent call last):
 ...
 ValueError: distance must be greater than 0
 
-# -----------------------------------------------------------------
-# 4. Pruebas de integer_validator() - TypeError (Tipo de Dato Inválido)
-# -----------------------------------------------------------------
-
-# Caso 1: String
 >>> bg.integer_validator("name", "John")
 Traceback (most recent call last):
 ...
 TypeError: name must be an integer
 
-# Caso 2: Float
 >>> bg.integer_validator("size", 10.5)
 Traceback (most recent call last):
 ...
 TypeError: size must be an integer
 
-# Caso 3: Tupla
 >>> bg.integer_validator("age", (4,))
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 4: Lista
 >>> bg.integer_validator("age", [3])
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 5: Booleano
 >>> bg.integer_validator("age", True)
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 6: Set (Conjunto)
 >>> bg.integer_validator("age", {3, 4})
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 7: None
 >>> bg.integer_validator("age", None)
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# -----------------------------------------------------------------
-# 5. Prueba de integer_validator() - Argumento Faltante (El error que tenías)
-# -----------------------------------------------------------------
-# Debe lanzar el TypeError estándar de Python por un argumento faltante
 >>> bg.integer_validator("age")
 Traceback (most recent call last):
 ...
