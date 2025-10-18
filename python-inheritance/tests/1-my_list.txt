@@ -22,7 +22,7 @@
 >>> print(my_list2)
 [-2, 3, 0]
 
-# Test con lista vacía
+# Test with list empty
 >>> my_list3 = MyList()
 >>> my_list3.print_sorted()
 []
