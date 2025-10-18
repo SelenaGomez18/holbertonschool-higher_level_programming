@@ -40,7 +40,6 @@ ValueError: distance must be greater than 0
 
 # -----------------------------------------------------------------
 # 4. Pruebas de integer_validator() - TypeError (Tipo de Dato Inválido)
-# Estos son los casos que fallaban en tu imagen original
 # -----------------------------------------------------------------
 
 # Caso 1: String
@@ -55,32 +54,41 @@ Traceback (most recent call last):
 ...
 TypeError: size must be an integer
 
-# Caso 3: Tupla (El problema '("age", (4,))')
+# Caso 3: Tupla
 >>> bg.integer_validator("age", (4,))
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 4: Lista (El problema '("age", [3])')
+# Caso 4: Lista
 >>> bg.integer_validator("age", [3])
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 5: Booleano (El problema '("age", True)')
+# Caso 5: Booleano
 >>> bg.integer_validator("age", True)
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 6: Set (Conjunto) (El problema '("age", {3, 4})')
+# Caso 6: Set (Conjunto)
 >>> bg.integer_validator("age", {3, 4})
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
 
-# Caso 7: None (El problema '("age", None)')
+# Caso 7: None
 >>> bg.integer_validator("age", None)
 Traceback (most recent call last):
 ...
 TypeError: age must be an integer
+
+# -----------------------------------------------------------------
+# 5. Prueba de integer_validator() - Argumento Faltante (El error que tenías)
+# -----------------------------------------------------------------
+# Debe lanzar el TypeError estándar de Python por un argumento faltante
+>>> bg.integer_validator("age")
+Traceback (most recent call last):
+...
+TypeError: integer_validator() missing 1 required positional argument: 'value'
