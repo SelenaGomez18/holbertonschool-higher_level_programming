@@ -36,15 +36,20 @@ class Circle(Shape):
 class Rectangle(Shape):
     """Rectangle shape class."""
 
-    def __init__(self, width, heigth):
+    def __init__(self, width, height):
         """Initialize rectangle with width and height."""
         self.width = width
-        self.heigth = heigth
+        self.height = height
 
     def area(self):
         """Return the area of the rectangle."""
-        return self.width * self.heigth
+        return self.width * self.height
 
     def perimeter(self):
         """Return the perimeter of the rectangle."""
-        return 2 * (self.width + self.heigth)
+        return 2 * (self.width + self.height)
+def shape_info(shape):
+    """Print the area and perimeter of any shape using duck typing."""
+    print("Area:", shape.area())
+    print("Perimeter:", shape.perimeter())
+        
