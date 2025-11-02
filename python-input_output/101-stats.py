@@ -35,30 +35,31 @@ def print_stats():
             print("{}: {}".format(code, status_codes[code]))
 
 
-try:
-    for line in sys.stdin:
-        count += 1
-        parts = line.split()
+if __name__ == "__main__":
+    try:
+        for line in sys.stdin:
+            count += 1
+            parts = line.split()
 
-        # Procesar tamaño del archivo
-        try:
-            total_size += int(parts[-1])
-        except (ValueError, IndexError):
-            pass
+            # Procesar tamaño del archivo
+            try:
+                total_size += int(parts[-1])
+            except (ValueError, IndexError):
+                pass
 
-        # Procesar código de estado
-        try:
-            status = int(parts[-2])
-            if status in status_codes:
-                status_codes[status] += 1
-        except (ValueError, IndexError):
-            pass
+            # Procesar código de estado
+            try:
+                status = int(parts[-2])
+                if status in status_codes:
+                    status_codes[status] += 1
+            except (ValueError, IndexError):
+                pass
 
-        if count % 10 == 0:
-            print_stats()
+            if count % 10 == 0:
+                print_stats()
 
-    print_stats()
+        print_stats()
 
-except KeyboardInterrupt:
-    print_stats()
-    raise
+    except KeyboardInterrupt:
+        print_stats()
+        raise
