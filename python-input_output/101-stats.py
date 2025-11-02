@@ -8,7 +8,8 @@ It computes:
   - Total file size
   - Number of lines by status code (200, 301, 400, 401, 403, 404, 405, 500)
 
-It prints the metrics every 10 lines and after a keyboard interruption (CTRL + C).
+It prints the metrics every 10 lines and after a
+keyboard interruption (CTRL + C).
 """
 
 import sys
