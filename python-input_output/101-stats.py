@@ -1,14 +1,9 @@
 #!/usr/bin/python3
-"""
-Reads stdin line by line and computes metrics:
-- Total file size
-- Count of status codes
-Prints stats every 10 lines and at keyboard interruption.
-"""
+"""Reads stdin line by line and computes metrics."""
 
 import sys
 
-# Diccionario con los códigos de estado esperados
+# Diccionario para contar códigos de estado
 status_codes = {
     200: 0,
     301: 0,
@@ -20,47 +15,46 @@ status_codes = {
     500: 0
 }
 
-total_size = 0
-line_count = 0
-
+total_size = 0  # Tamaño total de archivo
+count = 0       # Contador de líneas procesadas
 
 def print_stats():
-    """Print accumulated statistics."""
+    """Imprime las estadísticas acumuladas."""
     print("File size: {}".format(total_size))
     for code in sorted(status_codes.keys()):
-        if status_codes[code]:
+        if status_codes[code] > 0:
             print("{}: {}".format(code, status_codes[code]))
-
 
 try:
     for line in sys.stdin:
-        parts = line.strip().split()
-        if len(parts) < 2:
-            continue
+        count += 1
+        parts = line.split()
 
-        # Validar y obtener tamaño y código de estado
-        try:
-            size = int(parts[-1])
-            status = int(parts[-2])
-        except (ValueError, IndexError):
-            continue
+        # Validar que tenga al menos 2 elementos al final (status y size)
+        if len(parts) >= 2:
+            try:
+                # El tamaño de archivo está al final
+                total_size += int(parts[-1])
+            except (ValueError, IndexError):
+                pass
 
-        # Sumar tamaño total
-        total_size += size
+            try:
+                # El código de estado está en la penúltima posición
+                status = int(parts[-2])
+                if status in status_codes:
+                    status_codes[status] += 1
+            except (ValueError, IndexError):
+                pass
 
-        # Contar códigos válidos
-        if status in status_codes:
-            status_codes[status] += 1
-
-        line_count += 1
-
-        # Imprimir cada 10 líneas
-        if line_count % 10 == 0:
+        # Cada 10 líneas imprimimos las estadísticas
+        if count % 10 == 0:
             print_stats()
 
+    # Si se acaba la entrada sin interrupción, imprimir estadísticas finales
+    print_stats()
+
 except KeyboardInterrupt:
+    # Si se presiona Ctrl+C, imprimir estadísticas antes de salir
     print_stats()
     raise
 
-# Imprimir al finalizar la entrada
-print_stats()
