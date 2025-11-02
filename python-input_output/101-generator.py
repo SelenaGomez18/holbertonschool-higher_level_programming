@@ -1,8 +1,16 @@
 #!/usr/bin/python3
+"""
+Generates random log lines to stdout simulating HTTP requests:
+Format: <IP> - [<date>] "GET /projects/260 HTTP/1.1" <status> <size>
+Runs 10000 times with random delays between lines.
+"""
+
+
 import random
 import sys
 from time import sleep
 import datetime
+
 
 for i in range(10000):
     sleep(random.random())
