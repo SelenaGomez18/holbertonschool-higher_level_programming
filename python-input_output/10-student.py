@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""""""
+"""Module to convert class objects to JSON-serializable dict"""
 
 
 class Student:
