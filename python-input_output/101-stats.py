@@ -4,7 +4,10 @@ Reads stdin line by line and computes metrics:
 total file size and count of status codes.
 Prints stats every 10 lines and at keyboard interruption.
 """
+
+
 import sys
+
 
 status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 total_size = 0
