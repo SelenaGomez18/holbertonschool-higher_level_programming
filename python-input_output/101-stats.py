@@ -1,9 +1,7 @@
 #!/usr/bin/python3
-"""
-Reads stdin line by line and computes metrics:
+"""Reads stdin line by line and computes metrics:
 total file size and count of status codes.
-Prints stats every 10 lines and at keyboard interruption.
-"""
+Prints stats every 10 lines and at keyboard interruption."""
 
 
 import sys
