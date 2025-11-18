@@ -16,7 +16,7 @@ def fetch_and_print_posts():
     Fetch posts from the API and print the status code and each post title.
     """
     r = requests.get("https://jsonplaceholder.typicode.com/posts")
-    print("Status code:", r.status_code)
+    print(f"Status Code: {r.status_code}")
 
     if r.status_code == 200:
         posts = r.json()
