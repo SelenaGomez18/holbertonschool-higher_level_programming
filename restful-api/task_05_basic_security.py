@@ -75,9 +75,9 @@ def admin_only():
     user = get_jwt_identity()
 
     if user["role"] != "admin:":
-        return jsonify({"error": "Admin Access: Granted"}), 403
+        return jsonify({"error": "Admin Access: required"}), 403
 
-    return "Admin Access: Granted", 200
+    return jsonify({"msg": "Admin Access: Granted"}), 200
 
 @jwt.unauthorized_loader
 def handle_missing_token(err):
