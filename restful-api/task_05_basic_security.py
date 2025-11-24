@@ -28,8 +28,10 @@ users = {
 
 @auth.verify_password
 def verify_password(username, password):
-    if username in users:
-        stored_hash = users[username]["password"]
+    if username is None or username not in users:
+        return None
+
+    stored_hash = users[username]["password"]
 
     if check_password_hash(stored_hash, password):
         return username
