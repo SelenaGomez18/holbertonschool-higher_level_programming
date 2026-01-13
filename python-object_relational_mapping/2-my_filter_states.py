@@ -3,12 +3,13 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
+    # argumentos
     username = sys.argv[1]
     password = sys.argv[2]
     db_name = sys.argv[3]
     state_name = sys.argv[4]
 
-    # Conexión a la base de datos
+    # conexión
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -16,16 +17,14 @@ if __name__ == "__main__":
         passwd=password,
         db=db_name
     )
-
     cursor = db.cursor()
 
-    # Consulta SQL usando format (como pide el ejercicio)
+    # query EXACTA como pide Holberton
     query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(state_name)
     cursor.execute(query)
 
-    # Mostrar resultados
-    results = cursor.fetchall()
-    for row in results:
+    # imprimir resultados exactamente como tupla
+    for row in cursor.fetchall():
         print(row)
 
     cursor.close()
