@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Lists all states from the database hbtn_0e_0_usa
-that match the state name provided as argument.
+that match the state name provided as argument....
 """
 
 import MySQLdb
