@@ -9,10 +9,6 @@ import sys
 
 
 def main():
-    """
-    Connects to a MySQL database and retrieves states
-    whose name matches the user-provided argument.
-    """
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
@@ -35,9 +31,8 @@ def main():
     ).format(state_name)
 
     cursor.execute(query)
-    rows = cursor.fetchall()
 
-    for row in rows:
+    for row in cursor.fetchall():
         print(row)
 
     cursor.close()
