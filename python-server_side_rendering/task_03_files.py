@@ -35,20 +35,17 @@ def products():
     source = request.args.get("source")
     product_id = request.args.get("id")
 
-    # ❌ source inválido
     if source not in ["json", "csv"]:
         return render_template(
             "product_display.html",
             error="Wrong source"
         )
 
-    # 📂 leer archivo
     if source == "json":
         products = read_json()
     else:
         products = read_csv()
 
-    # 🔎 filtrar por id
     if product_id:
         product_id = int(product_id)
 
