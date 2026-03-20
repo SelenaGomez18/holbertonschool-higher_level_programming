@@ -12,7 +12,6 @@ def read_json():
     with open("products.json") as f:
         return json.load(f)
 
-
 def read_csv():
     products = []
 
